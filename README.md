@@ -17,7 +17,7 @@ Clone o repositório para sua máquina local.
 
 Execute o seguinte comando para construir e rodar os contêineres do frontend e backend:
 
-sudo docker-compose up --build;
+sudo docker-compose up --build
 
 Esse comando:
 
@@ -25,9 +25,9 @@ Constrói e inicia dois contêineres, um para o frontend (React) e outro para o 
 
 ### **Acessar a Aplicação:**
 
-Frontend: http://localhost:3003;
+Frontend: http://localhost:3003 ou http://localhost:3000;
 
-Backend: http://localhost:3002.
+Backend: http://localhost:3002 ou http://localhost:3001.
 
 ### **Criar Usuários e Login**
 

@@ -17,7 +17,7 @@ Clone o repositório para sua máquina local.
 
 Execute o seguinte comando para construir e rodar os contêineres do frontend e backend:
 
-docker-compose up --build;
+docker compose up -d --build
 
 Esse comando:
 

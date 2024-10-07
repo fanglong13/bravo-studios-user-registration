@@ -1,5 +1,5 @@
 # Usando uma imagem Node.js oficial
-FROM node:18
+FROM node:20 AS build
 
 # Criar o diretório de trabalho dentro do contêiner
 WORKDIR /app

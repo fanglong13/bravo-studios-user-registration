@@ -33,7 +33,7 @@ const Profile: React.FC = () => {
       <h2>Perfil do Usuário</h2>
       <div className="profile-content">
         <div className="profile-avatar">
-          <img src="/images/black_cat_avatar.png" alt="Avatar do Usuário" />
+          <img src="/images/avatar.png" alt="Avatar do Usuário" />
         </div>
         <div className="profile-details">
           <p>

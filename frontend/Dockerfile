@@ -1,27 +1,32 @@
-# Etapa 1: Construção da aplicação
-FROM node:18 as build
+# Define a imagem base usando a versão LTS do Node.js
+FROM node:lts as builder
 
+# Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
-# Copiar os arquivos package.json e instalar dependências
+# Copia os arquivos package.json e package-lock.json para o contêiner
 COPY package*.json ./
+
+# Instala todas as dependências listadas no package.json
 RUN npm install
 
-# Copiar o restante dos arquivos da aplicação
+# Copia todo o código da aplicação para o contêiner
 COPY . .
 
-# Rodar o build da aplicação React
+# Executa o script de build da aplicação React, criando a versão otimizada
 RUN npm run build
 
-# Etapa 2: Servir a aplicação com http-server
-FROM node:18-alpine
+# Define a imagem base usando a imagem mais recente do Nginx
+FROM nginx:latest
 
-RUN npm install -g http-server
+# Copia os arquivos gerados na etapa de build para o diretório do Nginx
+COPY --from=builder /app/build /usr/share/nginx/html
 
-# Copiar os arquivos da build do estágio anterior
-COPY --from=build /app/build /app/build
+# Copia a configuração personalizada do Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 3000
+# Informa ao Docker que o contêiner escutará na porta 80
+EXPOSE 80
 
-# Rodar o http-server para servir a aplicação
-CMD ["http-server", "/app/build", "-p", "3000"]
+# Define o comando padrão para iniciar o Nginx em modo foreground
+CMD ["nginx", "-g", "daemon off;"]
